@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
 const app = express();
-const PORT = 8081;
+const PORT = 8080;
 
 // Set up multer for file uploads
 const storage = multer.diskStorage({
@@ -34,7 +34,7 @@ const upload = multer({
 // Use CORS to allow cross-origin requests
 app.use(
   cors({
-    origin: "http://localhost:8080",
+    origin: "http://localhost:8081",
   })
 );
 app.use(bodyParser.json());
@@ -65,7 +65,7 @@ app.get("/country/:id", (req, res) => {
     (country) => country.id === countryId
   );
   if (country) {
-    country.image = `http://localhost:8081/${country.flag}`; // Add full path to image
+    country.image = `http://localhost:8080/${country.flag}`; // Add full path to image
     res.json(country);
   } else {
     res.status(404).json({ error: "Country not found" });
