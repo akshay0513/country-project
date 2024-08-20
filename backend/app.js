@@ -75,7 +75,6 @@ app.get("/country/:id", (req, res) => {
 // POST /country API
 app.post("/country", upload.single("image"), (req, res) => {
   const { name, continent, rank } = req.body;
-  const flag = req.file ? `images/${req.file.filename}` : "";
 
   if (!name || name.length < 3 || name.length > 20) {
     return res
@@ -97,6 +96,8 @@ app.post("/country", upload.single("image"), (req, res) => {
       .status(400)
       .json({ error: "Country name and rank must be unique" });
   }
+
+  const flag = req.file ? `images/${req.file.filename}` : "";
 
   const newCountry = {
     id: countriesData.countries.length + 1,

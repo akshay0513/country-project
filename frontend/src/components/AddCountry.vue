@@ -29,6 +29,7 @@
           v-model="continent"
           id="continent"
           class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+          :class="{ 'border-red-500': errors.continent }"
         >
           <option value="" disabled>Select a Continent</option>
           <option
@@ -39,6 +40,9 @@
             {{ continent }}
           </option>
         </select>
+        <p v-if="errors.continent" class="text-red-500 text-xs bold">
+          {{ errors.continent }}
+        </p>
       </div>
       <div class="mb-4">
         <label class="block text-gray-500 text-sm font-bold mb-2" for="rank">
@@ -126,6 +130,7 @@ export default {
       this.errors = {};
       if (!this.name || this.name.length < 3 || this.name.length > 20)
         this.errors.name = "Country name must be between 3 and 20 characters.";
+      if (!this.continent) this.errors.continent = "Select a Continent";
 
       if (!this.rank || isNaN(this.rank))
         this.errors.rank = "Rank must be a numeric value.";
