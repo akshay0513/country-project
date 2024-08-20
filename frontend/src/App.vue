@@ -45,12 +45,8 @@ export default {
       countriesList: [],
       selectedCountry: null,
       defaultCountryId: null,
+      continents: ['Oceania', 'Europe', 'Africa', 'Asia']
     };
-  },
-  computed: {
-    continents() {
-      return this.countriesList.map((country) => country.continent);
-    },
   },
   async mounted() {
     await this.fetchCountries();

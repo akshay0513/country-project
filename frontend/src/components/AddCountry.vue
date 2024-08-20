@@ -32,7 +32,7 @@
         >
           <option value="" disabled>Select a Continent</option>
           <option
-            v-for="continent in uniqueContinents"
+            v-for="continent in continents"
             :key="continent"
             :value="continent"
           >
@@ -117,11 +117,6 @@ export default {
       errorMessage: false,
       successMessage: false,
     };
-  },
-  computed: {
-    uniqueContinents() {
-      return [...new Set(this.continents)];
-    },
   },
   methods: {
     handleFileUpload(event) {
