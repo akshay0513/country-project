@@ -3,8 +3,8 @@
     <h1 class="text-center text-3xl font-bold text-gray-800 mb-8">
       Country Information
     </h1>
-    <div class="flex flex-col md:flex-row justify-center">
-      <div class="md:w-1/2 p-4">
+    <div class="centre">
+      <div class="w-80 p-4">
         <div class="bg-white rounded-lg p-4">
           <CountryDropdown
             :countriesList="countriesList"
@@ -19,7 +19,7 @@
           </Transition>
         </div>
       </div>
-      <div class="md:w-1/2 p-4">
+      <div class="w-80 p-4">
         <div class="bg-white rounded-lg p-4">
           <AddCountry :continents="continents" @countryAdded="fetchCountries" />
         </div>
@@ -35,7 +35,7 @@
           :key="data.id"
           :src="data.image"
           :alt="data.name"
-          class="size-16 cursor-pointer rounded-full object-cover border-solid border-black shadow-lg shadow-slate-600"
+          class="size-16 cursor-pointer object-cover border-solid border-black shadow-lg shadow-slate-600"
         />
       </div>
     </div>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import config from "@/config.js";
 import CountryDropdown from "./components/CountryDropdown.vue";
 import CountryDetails from "./components/CountryDetails.vue";
 import AddCountry from "./components/AddCountry.vue";
@@ -73,7 +74,7 @@ export default {
   methods: {
     async fetchCountries() {
       try {
-        const response = await fetch("http://localhost:8081/countries");
+        const response = await fetch(`${config.API_URL}/countries`);
         this.countriesList = await response.json();
       } catch (error) {
         console.error("Error fetching countries:", error);
@@ -81,9 +82,7 @@ export default {
     },
     async fetchCountryDetails(countryId) {
       try {
-        const response = await fetch(
-          `http://localhost:8081/country/${countryId}`
-        );
+        const response = await fetch(`${config.API_URL}/country/${countryId}`);
         this.selectedCountry = await response.json();
       } catch (error) {
         console.error("Error fetching country details:", error);
@@ -97,7 +96,10 @@ export default {
 .fade-leave-active {
   transition: opacity 0.3s ease;
 }
-
+.centre {
+  width: fit-content;
+  margin: 0 auto;
+}
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

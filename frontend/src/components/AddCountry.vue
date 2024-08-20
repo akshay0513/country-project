@@ -7,6 +7,7 @@
           Country Name
         </label>
         <input
+          placeholder="Enter Country Name"
           v-model="name"
           type="text"
           id="name"
@@ -44,6 +45,7 @@
           Rank
         </label>
         <input
+          placeholder="Enter Rank"
           v-model="rank"
           type="number"
           id="rank"
@@ -60,9 +62,10 @@
         </label>
         <input
           @change="handleFileUpload"
+          ref="imageInput"
           type="file"
           id="image"
-          accept=".jpg,.jpeg,.png"
+          accept=".jpg,.png"
           class="border rounded w-full py-2 text-gray-700 leading-tight focus:outline-none"
           :class="{ 'border-red-500': errors.image }"
         />
@@ -101,6 +104,7 @@
 </template>
 
 <script>
+import config from "@/config.js";
 export default {
   props: ["continents"],
   data() {
@@ -149,16 +153,18 @@ export default {
         formData.append("image", this.image);
 
         try {
-          const response = await fetch("http://localhost:8081/country", {
+          const response = await fetch(`${config.API_URL}/country`, {
             method: "POST",
             body: formData,
           });
           if (response.ok) {
+            this.errorMessage = false;
             this.$emit("countryAdded");
             this.name = "";
             this.continent = "";
             this.rank = null;
             this.image = null;
+            this.$refs.imageInput.value = "";
             this.successMessage = true;
             setTimeout(() => {
               this.successMessage = false;

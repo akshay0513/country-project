@@ -23,7 +23,7 @@ const upload = multer({
   storage: storage,
   limits: { fileSize: 4 * 1024 * 1024 }, // 4 MB limit
   fileFilter: (req, file, cb) => {
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    if (file.mimetype === 'image/jpg' || file.mimetype === 'image/png') {
       cb(null, true);
     } else {
       cb(new Error('Only .png and .jpg files are allowed'));
@@ -77,7 +77,7 @@ app.get('/country/:id', (req, res) => {
 // POST /country API
 app.post('/country', upload.single('image'), (req, res) => {
   const { name, continent, rank } = req.body;
-  const image = req.file ? `images/${req.file.filename}` : '';
+  const flag = req.file ? `images/${req.file.filename}` : '';
 
   if (!name || name.length < 3 || name.length > 20) {
     return res
@@ -104,7 +104,7 @@ app.post('/country', upload.single('image'), (req, res) => {
     id: countriesData.countries.length + 1,
     name,
     continent,
-    image,
+    flag,
     rank: parseInt(rank),
   };
 
