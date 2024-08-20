@@ -32,15 +32,15 @@ This project is a full-stack web application for managing countries, including t
    - cd backend
    - npm install
    - node app.js // use this command for run project
-   - The backend will run on http://localhost:8081
+   - The backend will run on http://localhost:8080
 
   ### Frontend Setup
   - cd frontend
   - npm install
   - npm run serve // use this command for run project
-  - The frontend will be available at http://localhost:8080
+  - The frontend will be available at http://localhost:8081
 
 ### Note- 
-- If the frontend is running on http://localhost:8080, CORS is configured accordingly in the backend. If, for any reason, the frontend port changes, the CORS configuration in the backend should be updated to reflect the new port.
+- If the frontend is running on http://localhost:8081, CORS is configured accordingly in the backend. If, for any reason, the frontend port changes, the CORS configuration in the backend should be updated to reflect the new port.
 
 
