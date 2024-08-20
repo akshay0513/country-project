@@ -25,20 +25,6 @@
         </div>
       </div>
     </div>
-    <hr class="border-t border-slate-100 border-solid" />
-    <div>
-      <h2 class="text-xl font-bold mt-0 mb-4">List Of Countries</h2>
-      <div class="flex flex-wrap justify-center sm:justify-start gap-6">
-        <img
-          @click="fetchCountryDetails(data.id)"
-          v-for="data in countriesList"
-          :key="data.id"
-          :src="data.image"
-          :alt="data.name"
-          class="size-16 cursor-pointer object-cover border-solid border-black shadow-lg shadow-slate-600"
-        />
-      </div>
-    </div>
   </div>
 </template>
 
